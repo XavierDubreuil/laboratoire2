@@ -1,3 +1,4 @@
+import HttpContext from '../httpContext.js';
 import MathModel from '../models/math.js';
 import Repository from '../models/repository.js';
 import Controller from './Controller.js';
@@ -128,6 +129,18 @@ export default class ContactsController extends Controller {
             this.params.error = "op need to be define";
             this.HttpContext.response.JSON(this.params);
         }
+    }
+    post()
+    {
+        this.HttpContext.response.notImplemented("Post is not implemented"); 
+    }
+    put()
+    {
+        this.HttpContext.response.notImplemented("Put is not implemented"); 
+    }
+    remove()
+    {
+        this.HttpContext.response.notImplemented("Remove is not implemented"); 
     }
 }
 function addition(x, y) {
