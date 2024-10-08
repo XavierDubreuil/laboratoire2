@@ -11,136 +11,139 @@ export default class ContactsController extends Controller {
     }
     get() {
         if (Object.keys(this.params).some(key => key === 'op')) {
-            if (containsOnlyKeys(this.params,)) {
-                if (Object.keys(this.params).some(key => key === 'n')) {
-                    if (this.params.n !== undefined) {
-                        if (!isNaN(this.params.n) && this.params.n != '' && this.params.n != ' ' && this.params.n != null) {
-                            switch (this.params.op) {
-                                case '!':
-                                    if (parseFloat(this.params.n) > 0) {
-                                        this.params.value = factorial(this.params.n);
-                                        this.HttpContext.response.JSON(this.params);
-                                    }
-                                    else {
-                                        this.params.error = "n need to be a integrer > 0";
-                                        this.HttpContext.response.JSON(this.params);
-                                    }
-                                    break;
-                                case 'p':
-                                    this.params.value = isPrime(this.params.n);
-                                    this.HttpContext.response.JSON(this.params);
-                                    break;
-                                case 'np':
-                                    this.params.value = findPrime(this.params.n);
-                                    this.HttpContext.response.JSON(this.params);
-                                    break;
-                                default:
-                                    this.params.error = "this operation can't be possible with a n, only !,p,np";
-                                    this.HttpContext.response.JSON(this.params);
-                                    break;
-                            }
-                        }
-                        else {
-                            this.params.error = "n need to be a number";
-                            this.HttpContext.response.JSON(this.params);
-                        }
-                    }
-                    else {
-                        this.params.error = "n need to be define";
-                        this.HttpContext.response.JSON(this.params);
-                    }
-                }
-                else if (Object.keys(this.params).some(key => key === 'x')) {
-                    if (Object.keys(this.params).some(key => key === 'y')) {
-                        if (this.params.x !== undefined) {
-                            if (this.params.y !== undefined) {
-                                if (!isNaN(this.params.x) && this.params.x != '' && this.params.x != ' ' && this.params.x != null) {
-                                    if (!isNaN(this.params.y) && this.params.y != '' && this.params.y != ' ' && this.params.y != null) {
-
-                                        switch (this.params.op) {
-                                            case ' ':
-                                                this.params.op = '+'
-                                                this.params.value = addition(this.params.x, this.params.y);
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
-                                            case '-':
-                                                this.params.value = soustraction(this.params.x, this.params.y);
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
-                                            case '*':
-                                                this.params.value = multiplication(this.params.x, this.params.y);
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
-                                            case '/':
-                                                if (this.params.x === "0" && this.params.y === "0")
-                                                    this.params.error = "Nan";
-                                                else if (this.params.x === "0" || this.params.y === "0")
-                                                    this.params.error = "Infinity";
-                                                else
-                                                    this.params.value = division(this.params.x, this.params.y);
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
-                                            case '%':
-                                                this.params.value = modulo(this.params.x, this.params.y);
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
-                                            default:
-                                                this.params.error = "this type of operation can't be possible with a x and y, only +,-,*,/";
-                                                this.HttpContext.response.JSON(this.params);
-                                                break;
+            if (this.params.op != null && this.params.op != '') {
+                if (containsOnlyKeys(this.params,)) {
+                    if (Object.keys(this.params).some(key => key === 'n')) {
+                        if (this.params.n !== undefined) {
+                            if (!isNaN(this.params.n) && this.params.n != '' && this.params.n != ' ' && this.params.n != null) {
+                                switch (this.params.op) {
+                                    case '!':
+                                        if (parseFloat(this.params.n) > 0) {
+                                            this.params.value = factorial(this.params.n);
+                                            this.HttpContext.response.JSON(this.params);
                                         }
-                                    }
-                                    else {
-                                        this.params.error = "y need to be a number";
+                                        else {
+                                            this.params.error = "n need to be a integrer > 0";
+                                            this.HttpContext.response.JSON(this.params);
+                                        }
+                                        break;
+                                    case 'p':
+                                        this.params.value = isPrime(this.params.n);
                                         this.HttpContext.response.JSON(this.params);
-                                    }
-                                }
-                                else {
-                                    this.params.error = "x need to be a number";
-                                    this.HttpContext.response.JSON(this.params);
+                                        break;
+                                    case 'np':
+                                        this.params.value = findPrime(this.params.n);
+                                        this.HttpContext.response.JSON(this.params);
+                                        break;
+                                    default:
+                                        this.params.error = "this operation can't be possible with a n, only !,p,np";
+                                        this.HttpContext.response.JSON(this.params);
+                                        break;
                                 }
                             }
                             else {
-                                this.params.error = "y need to be define";
+                                this.params.error = "n need to be a number";
                                 this.HttpContext.response.JSON(this.params);
                             }
                         }
                         else {
-                            this.params.error = "x need to be define";
+                            this.params.error = "n need to be define";
+                            this.HttpContext.response.JSON(this.params);
+                        }
+                    }
+                    else if (Object.keys(this.params).some(key => key === 'x')) {
+                        if (Object.keys(this.params).some(key => key === 'y')) {
+                            if (this.params.x !== undefined) {
+                                if (this.params.y !== undefined) {
+                                    if (!isNaN(this.params.x) && this.params.x != '' && this.params.x != ' ' && this.params.x != null) {
+                                        if (!isNaN(this.params.y) && this.params.y != '' && this.params.y != ' ' && this.params.y != null) {
+
+                                            switch (this.params.op) {
+                                                case ' ':
+                                                    this.params.op = '+'
+                                                    this.params.value = addition(this.params.x, this.params.y);
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                                case '-':
+                                                    this.params.value = soustraction(this.params.x, this.params.y);
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                                case '*':
+                                                    this.params.value = multiplication(this.params.x, this.params.y);
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                                case '/':
+                                                    if (this.params.x === "0" && this.params.y === "0")
+                                                        this.params.error = "Nan";
+                                                    else if (this.params.x === "0" || this.params.y === "0")
+                                                        this.params.error = "Infinity";
+                                                    else
+                                                        this.params.value = division(this.params.x, this.params.y);
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                                case '%':
+                                                    this.params.value = modulo(this.params.x, this.params.y);
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                                default:
+                                                    this.params.error = "this type of operation can't be possible with a x and y, only +,-,*,/";
+                                                    this.HttpContext.response.JSON(this.params);
+                                                    break;
+                                            }
+                                        }
+                                        else {
+                                            this.params.error = "y need to be a number";
+                                            this.HttpContext.response.JSON(this.params);
+                                        }
+                                    }
+                                    else {
+                                        this.params.error = "x need to be a number";
+                                        this.HttpContext.response.JSON(this.params);
+                                    }
+                                }
+                                else {
+                                    this.params.error = "y need to be define";
+                                    this.HttpContext.response.JSON(this.params);
+                                }
+                            }
+                            else {
+                                this.params.error = "x need to be define";
+                                this.HttpContext.response.JSON(this.params);
+                            }
+                        }
+                        else {
+                            this.params.error = "y need to be define";
                             this.HttpContext.response.JSON(this.params);
                         }
                     }
                     else {
-                        this.params.error = "y need to be define";
+                        this.params.error = "x need to be define";
                         this.HttpContext.response.JSON(this.params);
                     }
                 }
                 else {
-                    this.params.error = "x need to be define";
+                    this.params.error = "To many parameter";
                     this.HttpContext.response.JSON(this.params);
                 }
             }
-            else {
-                    this.params.error = "To many parameter";
-                    this.HttpContext.response.JSON(this.params);
+            else{
+                this.params.error = "op need to be define";
+                this.HttpContext.response.JSON(this.params);
             }
         }
-        else{
+        else {
             this.params.error = "op need to be define";
             this.HttpContext.response.JSON(this.params);
         }
     }
-    post()
-    {
-        this.HttpContext.response.notImplemented("Post is not implemented"); 
+    post() {
+        this.HttpContext.response.notImplemented("Post is not implemented");
     }
-    put()
-    {
-        this.HttpContext.response.notImplemented("Put is not implemented"); 
+    put() {
+        this.HttpContext.response.notImplemented("Put is not implemented");
     }
-    remove()
-    {
-        this.HttpContext.response.notImplemented("Remove is not implemented"); 
+    remove() {
+        this.HttpContext.response.notImplemented("Remove is not implemented");
     }
 }
 function addition(x, y) {
